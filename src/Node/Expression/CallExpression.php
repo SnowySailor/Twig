@@ -100,6 +100,14 @@ abstract class CallExpression extends AbstractExpression
             $first = false;
         }
 
+        if ($twigCallable->needsSource()) {
+            if (!$first) {
+                $compiler->raw(', ');
+            }
+            $compiler->raw('$this->source');
+            $first = false;
+        }
+
         foreach ($twigCallable->getArguments() as $argument) {
             if (!$first) {
                 $compiler->raw(', ');
@@ -291,6 +299,9 @@ abstract class CallExpression extends AbstractExpression
         if ($twigCallable->needsContext()) {
             array_shift($parameters);
         }
+        if ($twigCallable->needsSource()) {
+            array_shift($parameters);
+        }
         foreach ($twigCallable->getArguments() as $argument) {
             array_shift($parameters);
         }
@@ -345,6 +356,7 @@ abstract class CallExpression extends AbstractExpression
                     'needs_environment' => $this->hasAttribute('needs_environment') ? $this->getAttribute('needs_environment') : $current->needsEnvironment(),
                     'needs_context' => $this->hasAttribute('needs_context') ? $this->getAttribute('needs_context') : $current->needsContext(),
                     'needs_charset' => $this->hasAttribute('needs_charset') ? $this->getAttribute('needs_charset') : $current->needsCharset(),
+                    'needs_source' => $this->hasAttribute('needs_source') ? $this->getAttribute('needs_source') : $current->needsSource(),
                     'is_variadic' => $this->hasAttribute('is_variadic') ? $this->getAttribute('is_variadic') : $current->isVariadic(),
                 ],
             ))->withDynamicArguments($this->getAttribute('name'), $this->hasAttribute('dynamic_name') ? $this->getAttribute('dynamic_name') : $current->getDynamicName(), $this->hasAttribute('arguments') ? $this->getAttribute('arguments') : $current->getArguments()),
@@ -355,6 +367,7 @@ abstract class CallExpression extends AbstractExpression
                     'needs_environment' => $this->hasAttribute('needs_environment') ? $this->getAttribute('needs_environment') : $current->needsEnvironment(),
                     'needs_context' => $this->hasAttribute('needs_context') ? $this->getAttribute('needs_context') : $current->needsContext(),
                     'needs_charset' => $this->hasAttribute('needs_charset') ? $this->getAttribute('needs_charset') : $current->needsCharset(),
+                    'needs_source' => $this->hasAttribute('needs_source') ? $this->getAttribute('needs_source') : $current->needsSource(),
                     'is_variadic' => $this->hasAttribute('is_variadic') ? $this->getAttribute('is_variadic') : $current->isVariadic(),
                 ],
             ))->withDynamicArguments($this->getAttribute('name'), $this->hasAttribute('dynamic_name') ? $this->getAttribute('dynamic_name') : $current->getDynamicName(), $this->hasAttribute('arguments') ? $this->getAttribute('arguments') : $current->getArguments()),

@@ -95,6 +95,7 @@ final class AttributeExtension extends AbstractExtension
                     'needs_context' => $attribute->needsContext ?? false,
                     'needs_environment' => $attribute->needsEnvironment ?? $this->needsEnvironment($method),
                     'needs_charset' => $attribute->needsCharset ?? false,
+                    'needs_source' => $attribute->needsSource ?? false,
                     'is_variadic' => $method->isVariadic(),
                     'is_safe' => $attribute->isSafe,
                     'is_safe_callback' => $attribute->isSafeCallback,
@@ -118,6 +119,7 @@ final class AttributeExtension extends AbstractExtension
                     'needs_context' => $attribute->needsContext ?? false,
                     'needs_environment' => $attribute->needsEnvironment ?? $this->needsEnvironment($method),
                     'needs_charset' => $attribute->needsCharset ?? false,
+                    'needs_source' => $attribute->needsSource ?? false,
                     'is_variadic' => $method->isVariadic(),
                     'is_safe' => $attribute->isSafe,
                     'is_safe_callback' => $attribute->isSafeCallback,
@@ -140,6 +142,7 @@ final class AttributeExtension extends AbstractExtension
                     'needs_context' => $attribute->needsContext ?? false,
                     'needs_environment' => $attribute->needsEnvironment ?? $this->needsEnvironment($method),
                     'needs_charset' => $attribute->needsCharset ?? false,
+                    'needs_source' => $attribute->needsSource ?? false,
                     'is_variadic' => $method->isVariadic(),
                     'deprecation_info' => $attribute->deprecationInfo,
                 ]);

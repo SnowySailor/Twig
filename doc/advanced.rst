@@ -216,6 +216,22 @@ the first argument to the filter call (or the second one if
         // ...
     }, ['needs_context' => true, 'needs_environment' => true]);
 
+Source-aware Filters
+~~~~~~~~~~~~~~~~~~~~~
+
+If you want to access information about the source template file, set the
+``needs_source`` option to ``true``; Twig will pass the current Source object as
+the first argument to the filter call (or the second/third one if
+``needs_environment`` and/or ``needs_context`` are also set to ``true``)::
+
+    $filter = new \Twig\TwigFilter('rot13', function ($context, $string) {
+        // ...
+    }, ['needs_context' => true]);
+
+    $filter = new \Twig\TwigFilter('rot13', function (\Twig\Environment $env, \Twig\Source $source, $string) {
+        // ...
+    }, ['needs_context' => true, 'needs_source' => true]);
+
 Automatic Escaping
 ~~~~~~~~~~~~~~~~~~
 

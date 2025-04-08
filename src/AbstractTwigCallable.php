@@ -32,6 +32,7 @@ abstract class AbstractTwigCallable implements TwigCallableInterface
             'needs_environment' => false,
             'needs_context' => false,
             'needs_charset' => false,
+            'needs_source' => false,
             'is_variadic' => false,
             'deprecation_info' => null,
             'deprecated' => false,
@@ -105,6 +106,11 @@ abstract class AbstractTwigCallable implements TwigCallableInterface
     public function needsContext(): bool
     {
         return $this->options['needs_context'];
+    }
+
+    public function needsSource(): bool
+    {
+        return $this->options['needs_source'];
     }
 
     /**
@@ -182,6 +188,10 @@ abstract class AbstractTwigCallable implements TwigCallableInterface
 
     public function getMinimalNumberOfRequiredArguments(): int
     {
-        return ($this->options['needs_charset'] ? 1 : 0) + ($this->options['needs_environment'] ? 1 : 0) + ($this->options['needs_context'] ? 1 : 0) + \count($this->arguments);
+        return ($this->options['needs_charset'] ? 1 : 0)
+            + ($this->options['needs_environment'] ? 1 : 0)
+            + ($this->options['needs_context'] ? 1 : 0)
+            + ($this->options['needs_source'] ? 1 : 0)
+            + \count($this->arguments);
     }
 }
